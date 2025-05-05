@@ -1,19 +1,8 @@
-/* eslint-disable no-underscore-dangle */
 export default class Building {
-  /**
-   * @param {number} sqft - size of building
-   *
-   * Implement a getter and setter for sqft
-   */
   constructor(sqft) {
-    this.sqft = sqft;
-    if (this.constructor !== Building) {
-      if (typeof this.evacuationWarningMessage !== 'function') {
-        throw new Error(
-          'Class extending Building must override evacuationWarningMessage',
-        );
-      }
-    }
+    if (typeof sqft !== 'number') throw new Error();
+    this._sqft = sqft;
+    this.evacuationWarningMessage();
   }
 
   get sqft() {
@@ -22,5 +11,10 @@ export default class Building {
 
   set sqft(value) {
     this._sqft = value;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  evacuationWarningMessage() {
+    if (this.constructor.name !== 'Building') throw new Error('Class extending Building must override evacuationWarningMessage');
   }
 }

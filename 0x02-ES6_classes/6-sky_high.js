@@ -1,16 +1,19 @@
-/* eslint-disable no-underscore-dangle */
 import Building from './5-building';
 
 export default class SkyHighBuilding extends Building {
-  /**
-   * @param {number} sqft - square foot of building
-   * @param {number} floors - number of floors in building
-   *
-   * Implement getters and setters
-   */
   constructor(sqft, floors) {
+    if (typeof floors !== 'number') throw new Error();
     super(sqft);
-    this.floors = floors;
+    this._floors = floors;
+    this._sqft = sqft;
+  }
+
+  get sqft() {
+    return this._sqft;
+  }
+
+  set sqft(value) {
+    this._sqft = value;
   }
 
   get floors() {
